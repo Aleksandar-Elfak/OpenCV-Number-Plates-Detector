@@ -78,7 +78,7 @@ def showPlate(imgOriginal, size, multiple=False):
 
 def Image():
     carPlateCascade = cv2.CascadeClassifier(
-        cv2.data.haarcascades + "haarcascade_russian_plate_number.xml"
+        "venv\\Resources\\haarcascade_russian_plate_number.xml"
     )
 
     images = [
@@ -117,8 +117,10 @@ def Image():
 
 def Video():
     carPlateCascade = cv2.CascadeClassifier(
-        cv2.data.haarcascades + "haarcascade_russian_plate_number.xml"
+        "venv\\Resources\\haarcascade_russian_plate_number.xml"
     )
+
+    print(carPlateCascade)
 
     print("Press q to stop the video.")
 
