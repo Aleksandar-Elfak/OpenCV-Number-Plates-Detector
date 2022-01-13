@@ -122,7 +122,7 @@ def Video():
 
     print("Press q to stop the video.")
 
-    video = cv2.VideoCapture("Resources\\CarVideo1_720.mp4")
+    video = cv2.VideoCapture("venv\\Resources\\CarVideo1_720.mp4")
 
     plate = np.zeros((height, width, 3), np.uint8)
 
