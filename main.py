@@ -52,8 +52,10 @@ def reorderPoints(points):
 
 
 def zoomIn(img, points):
-    perspective = cv2.getPerspectiveTransform(np.float32(points),
-                                              np.float32([[0, 0], [width, 0], [0, height], [width, height]]))
+    perspective = cv2.getPerspectiveTransform(
+        np.float32(points),
+        np.float32([[0, 0], [width, 0], [0, height], [width, height]]),
+    )
     warped = cv2.warpPerspective(img, perspective, (width, height))
 
     warped = cv2.resize(warped, (width, height))
@@ -62,7 +64,7 @@ def zoomIn(img, points):
 
 
 def showPlate(imgOriginal, size, multiple=False):
-    imgCropped = imgOriginal[size[1]:size[1] + size[3], size[0]:size[0] + size[2]]
+    imgCropped = imgOriginal[size[1] : size[1] + size[3], size[0] : size[0] + size[2]]
     imgCropped = cv2.resize(imgCropped, (width, height))
     processedImg = preprocessing(imgCropped)
     cont = getContours(processedImg, imgCropped, multiple)
@@ -75,12 +77,16 @@ def showPlate(imgOriginal, size, multiple=False):
 
 
 def Image():
-    carPlateCascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_russian_plate_number.xml')
+    carPlateCascade = cv2.CascadeClassifier(
+        cv2.data.haarcascades + "haarcascade_russian_plate_number.xml"
+    )
 
-    images = [cv2.imread("C:\\Users\\Aca\\PycharmProjects\\pythonProject\\OpenCV\\venv\\Resources\\car1.png"),
-              cv2.imread("C:\\Users\\Aca\\PycharmProjects\\pythonProject\\OpenCV\\venv\\Resources\\car2.png"),
-              cv2.imread("C:\\Users\\Aca\\PycharmProjects\\pythonProject\\OpenCV\\venv\\Resources\\car3.jpg"),
-              cv2.imread("C:\\Users\\Aca\\PycharmProjects\\pythonProject\\OpenCV\\venv\\Resources\\car4.jpg")]
+    images = [
+        cv2.imread("venv\\Resources\\car1.png"),
+        cv2.imread("venv\\Resources\\car2.png"),
+        cv2.imread("venv\\Resources\\car3.jpg"),
+        cv2.imread("venv\\Resources\\car4.jpg"),
+    ]
 
     print("Press any key for next Image.")
 
@@ -110,12 +116,13 @@ def Image():
 
 
 def Video():
-    carPlateCascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_russian_plate_number.xml')
+    carPlateCascade = cv2.CascadeClassifier(
+        cv2.data.haarcascades + "haarcascade_russian_plate_number.xml"
+    )
 
     print("Press q to stop the video.")
 
-    video = cv2.VideoCapture(
-        "C:\\Users\\Aca\\PycharmProjects\\pythonProject\\OpenCV\\venv\\Resources\\CarVideo1_720.mp4")
+    video = cv2.VideoCapture("Resources\\CarVideo1_720.mp4")
 
     plate = np.zeros((height, width, 3), np.uint8)
 
@@ -138,7 +145,7 @@ def Video():
         imgJoined = np.hstack((plate, img))
         cv2.imshow("Car", imgJoined)
 
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        if cv2.waitKey(1) & 0xFF == ord("q"):
             break
 
 
